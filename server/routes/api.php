@@ -1,12 +1,44 @@
 <?php
 
-use Illuminate\Http\Request;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\LogoutController;
+use App\Http\Controllers\Auth\MeController;
+use App\Http\Controllers\Auth\RefreshController;
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', function () {
     return response()->json([
         'status' => 'Success',
-        'message' => 'Is Ok',
+        'message' => 'Api is in working order...',
     ]);
+});
+
+
+Route::prefix('auth')->group(function () {
+    Route::post(
+        'register',
+        RegisterController::class
+    );
+
+    Route::post(
+        'login',
+        LoginController::class
+    );
+
+    Route::middleware('jwt.verify')->group(function () {
+        Route::post(
+            'me',
+            MeController::class
+        );
+        Route::post(
+            'refresh',
+            RefreshController::class
+        );
+        Route::post(
+            'logout',
+            LogoutController::class
+        );
+    });
 });
