@@ -13,9 +13,10 @@ class RefreshController extends Controller
     {
         try {
             $newToken = JWTAuth::parseToken()->refresh();
-            return Json::success(['access_token' => $newToken]);
+            return Json::respondWithToken($newToken);
         } catch (JWTException $e) {
             return Json::error(['message' => 'Could not refresh the token'], 500);
         }
     }
 }
+

@@ -1,10 +1,12 @@
 <?php
 
+use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\MeController;
 use App\Http\Controllers\Auth\RefreshController;
 use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Auth\ResetPasswordController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -26,6 +28,17 @@ Route::prefix('auth')->group(function () {
         'login',
         LoginController::class
     );
+
+    Route::post(
+        'password/email',
+        [ForgotPasswordController::class, 'sendResetLinkEmail']
+    );
+
+    Route::post(
+        'password/reset',
+        [ResetPasswordController::class, 'reset']
+    )->name('password.reset');
+
 
     Route::middleware('jwt.verify')->group(function () {
         Route::post(

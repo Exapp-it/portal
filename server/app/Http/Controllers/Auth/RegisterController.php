@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Resources\UserResource;
 use Json;
 use Register;
 
@@ -20,7 +21,7 @@ class RegisterController extends Controller
 
         return Json::success([
             'message' => 'Registration was successful',
-            'user' => $user,
+            'user' => new UserResource($user),
         ]);
     }
 }

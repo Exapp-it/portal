@@ -22,6 +22,6 @@ class LoginController extends Controller
             return Json::error($response['error'], $response['code']);
         }
 
-        return Json::success($response['success']);
+        return Json::respondWithToken($response['success']);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Response;
 
 class Json
@@ -18,6 +19,15 @@ class Json
     public function error(array $data, int $code = 400): JsonResponse
     {
         return $this->formulateResponse(self::ERROR, $data, $code);
+    }
+
+    public function respondWithToken($token)
+    {
+        return $this->success([
+            'access_token' => $token,
+            'token_type' => 'bearer',
+            'expires_in' => Auth::factory()->getTTL() * 60
+        ]);
     }
 
     private function formulateResponse(string $status, array $data, int $httpStatus): JsonResponse
