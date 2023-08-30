@@ -21,8 +21,8 @@ class UserResource extends JsonResource
             'email' => $this->email,
             'balance' => number_format($this->balance, '2', '.'),
             'currency' => $this->currency,
-            'google_id' => $this->google_id ?? false,
-            'avatar' => $this->avatar ?? false,
+            'google_id' => $this->google_id,
+            'avatar' => $this->avatar,
             'role' => $this->role,
             'status' => $this->status,
         ];
