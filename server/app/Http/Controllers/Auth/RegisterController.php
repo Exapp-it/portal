@@ -25,7 +25,9 @@ class RegisterController extends Controller
             ]);
         } catch (ValidationException $e) {
 
-            return Json::error(['message' => $e->validator->errors()], 422);
+            return Json::error(['errors' => $e->validator->errors()], 422);
         }
     }
 }
+
+

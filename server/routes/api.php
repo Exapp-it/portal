@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\ForgotPasswordController;
+use App\Http\Controllers\Auth\GoogleController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\LogoutController;
 use App\Http\Controllers\Auth\MeController;
@@ -38,6 +39,14 @@ Route::prefix('auth')->group(function () {
         'password/reset',
         [ResetPasswordController::class, 'reset']
     )->name('password.reset');
+
+
+
+    Route::middleware('session')->group(function () {
+        Route::get('google', [GoogleController::class, 'redirectToGoogle']);
+        Route::get('google/callback', [GoogleController::class, 'handleGoogleCallback']);
+    });
+
 
 
     Route::middleware('jwt.verify')->group(function () {

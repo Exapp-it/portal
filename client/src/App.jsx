@@ -1,14 +1,13 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Home from "./pages/Home";
-// Импортируйте другие страницы здесь
+import { useState } from 'react'
 
 function App() {
+  const [count, setCount] = useState(0)
+
   return (
     <>
-      <Home />
+      <h1>Hello world</h1>
     </>
-  );
+  )
 }
 
-export default App;
+export default App
