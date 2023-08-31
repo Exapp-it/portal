@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
 use App\Http\Resources\UserResource;
 use App\Notifications\RegistrationSuccessful;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Validation\ValidationException;
 use Json;
 use Register;
@@ -25,9 +26,8 @@ class RegisterController extends Controller
             ]);
         } catch (ValidationException $e) {
 
-            return Json::error(['errors' => $e->validator->errors()], 422);
+            // return Json::error(['errors' => $e->validator->errors()], 422);
+            return Response::json($e->validator->errors(), 422);
         }
     }
 }
-
-

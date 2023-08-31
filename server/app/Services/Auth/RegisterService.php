@@ -38,7 +38,7 @@ class RegisterService
     private function generateExternalId(int $attempts = 5)
     {
         for ($i = 0; $i < $attempts; $i++) {
-            $idLength = mt_rand(9, 15);
+            $idLength = mt_rand(9, 11);
             $id = (string) mt_rand(pow(10, $idLength - 1), pow(10, $idLength) - 1);
 
             if (!User::where('external_id', $id)->exists()) {
