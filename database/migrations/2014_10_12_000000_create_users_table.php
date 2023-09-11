@@ -13,23 +13,8 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('external_id')->unique();
             $table->string('name');
-            $table->string('email')->unique()->index();
-
-            $table->double('balance')->default(0.0);
-            $table->enum('currency', config('settings.currencies'))->index();
-            $table->string('secret')->nullable();
-
-            $table->string('google_id')->nullable()->unique()->index();
-            $table->string('avatar')->nullable();
-            $table->string('google_token')->nullable();
-
-            $table->string('token');
-
-            $table->integer('role')->default(config('settings.roles.user'))->index();
-            $table->integer('status')->default(config('settings.status.active'))->index();
-
+            $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
